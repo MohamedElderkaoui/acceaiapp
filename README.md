@@ -31,22 +31,29 @@ py -m venv .venv
 python -m pip install --upgrade pip
 ```
 
-Instala primero una versión de PyTorch con CUDA compatible con la GPU y los controladores del equipo. Después instala las dependencias declaradas y Ultralytics:
+Instala PyTorch con CUDA 12.6 y después las dependencias del proyecto. Para el entorno actual (Python 3.13 y controlador NVIDIA 566.07), utiliza:
 
 ```powershell
+python -m pip install torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cu126
 python -m pip install -r requirements.txt
-python -m pip install ultralytics
 ```
 
-`requirements.txt` solo declara Streamlit; Ultralytics y PyTorch son necesarios para ejecutar la detección. Asegúrate de que la instalación de PyTorch tiene soporte CUDA antes de iniciar la aplicación.
+`requirements.txt` instala Streamlit, Pandas, OpenCV y Ultralytics. PyTorch se instala por separado para seleccionar la rueda CUDA; el controlador NVIDIA sigue siendo necesario. Para otro equipo, elige en la página oficial de PyTorch la rueda que coincida con su Python, sistema y GPU.
 
-Inicia la interfaz:
+Inicia la interfaz con el script de Windows:
 
 ```powershell
-streamlit run streamlit_app.py
+.\start.ps1
 ```
 
-Streamlit mostrará la dirección local de la aplicación en la terminal y abrirá la interfaz en el navegador.
+También puedes iniciarla directamente o cambiar el puerto:
+
+```powershell
+python -m streamlit run streamlit_app.py
+.\start.ps1 -Port 8502
+```
+
+La aplicación queda disponible solo en `127.0.0.1` por defecto.
 
 ## Modelo YOLO
 
